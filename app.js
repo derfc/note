@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var cors = require("cors");
 var fs = require("fs");
+// var basicAuth = require("express-basic-auth");
 var Note = require("./note");
 var app = express();
 app.use(bodyParser.json());
