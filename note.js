@@ -66,11 +66,21 @@ module.exports = class Note {
       });
     });
   }
-  remove(index) {
+  remove(userName, index) {
     return this.init().then(() => {
       return this.read().then(() => {
-        console.log("Note to delete: ", this.note[index]);
-        this.note.splice(index, 1);
+        // console.log("Note to delete: ", this.note[index]);
+
+        let notes = [];
+        for (let i = 0; i < this.note.length; i++) {
+          if (Object.keys(this.note[i]).includes(userName)) {
+            notes.push(this.note[i].userName);
+          }
+        }
+        console.log(notes);
+        let targetIndex = this.note.indexOf(notes[index]);
+
+        this.note.splice(targetIndex, 1);
         return this.write();
       });
     });
