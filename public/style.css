@@ -1,72 +1,80 @@
+h1 {
+	color: #03a9f4;
+}
+
 section {
-  /* background-color: red; */
-  /* background: url(/asset/sunset.jpg);
+	/* background-color: red; */
+	/* background: url(/asset/sunset.jpg);
   background-size: cover; */
-  background-color: #1f1c13;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 50px;
-  height: 100vh;
+	background-color: #1f1c13;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+	height: 100vh;
 }
 .box {
-  width: 400px;
-  height: 50vh;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.8);
-  box-sizing: border-box;
-  box-shadow: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+	width: 400px;
+	height: 70vh;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	background: rgba(0, 0, 0, 0.8);
+	box-sizing: border-box;
+	box-shadow: rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
 }
 .box h3 {
-  margin: 0 0 30px;
-  padding: 0;
-  text-align: center;
+	margin: 0 0 30px;
+	padding: 0;
+	text-align: center;
 }
 .box .inputbox {
-  position: relative;
+	position: relative;
 }
 .box .inputbox input {
-  width: 100%;
-  padding: 10px 0;
-  font-size: 30px;
-  color: #fff;
-  margin-bottom: 30px;
-  border: none;
-  border-bottom: 1px solid #fff;
-  background: transparent;
+	width: 100%;
+	padding: 10px 0;
+	font-size: 30px;
+	color: #fff;
+	margin-bottom: 30px;
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
 }
 
 .box .inputbox label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 10px 0;
-  font-size: 30px;
-  color: #fff;
-  pointer-events: none;
-  transition: 0.5s;
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px 0;
+	font-size: 30px;
+	color: #fff;
+	pointer-events: none;
+	transition: 0.5s;
 }
 .box .inputbox input:focus ~ label,
 .box .inputbox input:valid ~ label {
-  top: -10px;
-  left: 0;
-  color: aqua;
-  font-size: 12px;
+	top: -10px;
+	left: 0;
+	color: aqua;
+	font-size: 12px;
 }
 
 .box input[type="submit"] {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #fff;
-  background: #03a9f4;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 30px;
+	background: transparent;
+	border: none;
+	outline: none;
+	color: #fff;
+	background: #03a9f4;
+	padding: 10px 20px;
+	cursor: pointer;
+	border-radius: 30px;
+}
+
+.output {
+	background-color: #1f1c13;
 }

@@ -3,7 +3,6 @@ var bodyParser = require("body-parser");
 var cors = require("cors");
 var fs = require("fs");
 var Note = require("./note");
-var User = require("./users");
 var hb = require("express-handlebars");
 var bcrypt = require("bcrypt");
 var app = express();
@@ -16,6 +15,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.engine("handlebars", hb({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+app.use(express.static("public"));
 
 let jsonUsers = __dirname + "/users.json";
 let usersData = new Note(jsonUsers);
