@@ -30,23 +30,40 @@
       $(document).ready(() => {
         let userName = "{{title}}"
         console.log(userName)
-      $.get(`http://localhost:8080/note`)
-      .done((data)=>{
-        let notes = []
-        for(let i=0; i<data.length; i++){
-          if (Object.keys(data[i]).includes(userName)){
-            console.log("hi", data[i])
-            console.log(data[i].on9jai)
-            notes.push(data[i].{{title}})
-          }
-        }
-        console.log(notes)
-        return notes.map((notes, index)=>$("#existingNotes").append(`<li>${notes}<form action="/note/${userName}/${index}" method="DELETE">
-        <button name="${userName}" id="${index}" value="delete">delete</button>
-        </form></li>`))
+       $("button").click((e)=>{
+        e.preventDefault()
+        console.log("line78", e.target.id)
+        $.ajax({url: `/note/${userName}/${e.target.id}`, 
+                  type: "DELETE",
+                  success: function(){
+                    console.log("success")
+                  }         
         })
-      .fail(()=>console.log("fail"))
+      .done(function(){window.location.reload()})
+      .fail(()=>console.log("hahafail"))
       .always(()=>console.log("running"))
+      })
+
+
+      $("textarea").focusout((e)=>{
+        e.preventDefault()
+        console.log(e.target.dataset.number)
+        console.log(e.target.value)
+        $.ajax({
+          url:`/note/${userName}/${e.target.value}/${e.target.dataset.number}`,
+          type:"PUT",
+          success: function(){
+                    console.log("success")
+                  }
+        })
+        .done(function(){window.location.reload()})
+        .fail(()=>console.log("fail again"))
+        .always(()=>console.log("still running"))
+      })
+
+
+
+
       })
     </script>
   </body>

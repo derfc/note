@@ -1,12 +1,19 @@
 <h1>hello {{ userName }}</h1>
 <form action="/note" method="POST">
-          <h3>Notes</h3>
+          <h3>write something</h3>
           <div class="inputbox">
             <input type="text" name="{{ userName }}" />
-            <label>write something</label>
           </div>
           <input type="submit" name="submit" value="submit" id="sumbit" />
 </form>
-<ul id="existingNotes">
-</ul>
+
+<h2>{{userName}}'s note</h2>
+{{#each note}}
+{{!-- {{this}}:{{@index}} --}}
+<textarea id="text{{@index}}" name="{{userName}}" data-number={{@index}} rows="4" cols="50">
+{{this}}
+</textarea>
+<button method="DELETE" name="{{userName}}" id="{{@index}}" value="delete">delete</button>
+
+{{/each}}
 
