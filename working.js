@@ -111,14 +111,14 @@ app.get("/users/:username", (req, res) => {
 	return noteData
 		.list()
 		.then((notes) => {
-			console.log("hi", notes[req.params.username]);
+			// console.log("hi", notes[req.params.username]);
 			const allNotes = {
 				note: notes[req.params.username],
 				title: req.params.username,
 				userName: req.params.username,
 				port: port,
 			};
-			console.log("export", allNotes);
+			// console.log("export", allNotes);
 			// res.render("usersHome", {
 			// 	title: req.params.username,
 			// 	userName: req.params.username,
@@ -192,11 +192,11 @@ app.get("/note", (req, res) => {
 
 app.post("/note", (req, res) => {
 	console.log("posting json file");
-	console.log(req.body);
+	// console.log(req.body);
 	let note = req.body;
 	let userName = Object.keys(req.body)[0];
-	console.log("username", userName);
-	console.log("reqbody", note);
+	// console.log("username", userName);
+	// console.log("reqbody", note);
 	console.log("posting ", note[Object.keys(req.body)[0]]);
 	let adding = note[Object.keys(req.body)[0]];
 	return noteData
@@ -239,7 +239,7 @@ app.delete("/note/:username/:index", (req, res) => {
 		.then(() => noteData.list())
 		.then((notes) => {
 			console.log("trying redirect");
-			console.log(notes);
+			// console.log(notes);
 			// res.redirect(`/users/${userName}`);
 			res.json(notes);
 			// res.render('index', {notes})
@@ -253,3 +253,5 @@ app.delete("/note/:username/:index", (req, res) => {
 app.listen(port, () => {
 	console.log("Running on port ", port);
 });
+
+module.exports = app;

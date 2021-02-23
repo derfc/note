@@ -10,10 +10,35 @@
       integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="http://localhost:8080/style.css" />
+    <link rel="stylesheet" href="../style.css" />
+
   </head>
   <body>
+    <header><h1>hello {{ title }}</h1></header>
     {{{body}}}
+<footer>
+  <div class="container-fluid padding">
+    <div class="row text-center">
+      <div class="col-md-6">
+        <p>Visit Me</p>
+        <hr class="light">
+        <p>CoCoon Ignite Ventures</p>
+        <a href="https://www.google.com/maps/place/CoCoon+Ignite+Ventures/@22.2860785,114.190358,15z/data=!4m5!3m4!1s0x0:0xa5da560274bd706c!8m2!3d22.2860785!4d114.190358">
+          <p>3/F, Citicorp Center, 18 Whitfield Rd</p>
+          <p>Tin Hau, Hong Kong</p>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <p>Hours</p>
+        <hr class="light">
+        <p>Monday - Friday</p>
+        <p>9am - 6pm</p>
+        <p><i class="fab fa-whatsapp"></i>+852 2180 0000</p>
+      </div>
+    </div>
+  </div>
+</footer>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
@@ -29,13 +54,14 @@
       $(document).ready(() => {
         let userName = "{{title}}"
         console.log(userName)
-       $("button").click((e)=>{
+      $("button").click((e)=>{
         e.preventDefault()
         console.log("line78", e.target.id)
         $.ajax({url: `/note/${userName}/${e.target.id}`, 
                   type: "DELETE",
                   success: function(){
                     console.log("success")
+                    window.location.reload()
                   }         
         })
       .done(function(){window.location.reload()})

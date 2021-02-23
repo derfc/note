@@ -1,15 +1,20 @@
-<h1>hello {{ userName }}</h1>
-<div class="input">
+{{!-- <div class="greeting">
+<h1 class="text-center">hello {{ userName }}</h1>
+</div> --}}
+<div class="working-area container">
+  <div class="row">
+<div class="input col">
 <form action="/note" method="POST">
           <h3>write something</h3>
           <div class="inputbox">
             <input type="text" name="{{ userName }}" />
+            {{!-- <textarea type="text" name="{{ userName }}" rows="4" cols="40"></textarea> --}}
           </div>
           <input type="submit" name="submit" value="submit" id="sumbit" />
 </form>
 </div>
 
-<div class="output">
+<div class="output col">
 <h2>{{userName}}'s note</h2>
 {{#each note}}
 {{!-- {{this}}:{{@index}} --}}
@@ -18,4 +23,6 @@
 </textarea>
 <button method="DELETE" name="{{userName}}" id="{{@index}}" class="button"value="delete">delete</button>
 {{/each}}
+</div>
+</div>
 </div>

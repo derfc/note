@@ -1,7 +1,11 @@
-h1 {
+h1,
+h2 {
 	color: #03a9f4;
 }
-
+header {
+	background-color: black;
+	padding: 10px;
+}
 section {
 	/* background-color: red; */
 	/* background: url(/asset/sunset.jpg);
@@ -75,6 +79,15 @@ section {
 	border-radius: 30px;
 }
 
+.container {
+	justify-content: center;
+	padding: 50px;
+}
+
 .output {
 	background-color: #1f1c13;
+}
+footer {
+	background-color: cadetblue;
+	padding: 10px;
 }
