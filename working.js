@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 	console.log("diu");
 
 	res.render("index");
-	console.log(req);
+	// console.log(req);
 });
 app.get("/users", (req, res) => {
 	// res.json(users);
@@ -57,17 +57,19 @@ app.post("/users/login", async (req, res) => {
 		}
 	);
 	let parsed = JSON.parse(existingUser);
-	let user = parsed.find((user) => user.name === userName);
+	console.log("addinguser", parsed);
+	let userArr = Object.keys(parsed);
+	let user = userArr.find((user) => user === userName);
 	if (user == null) {
 		try {
 			let salt = await bcrypt.genSalt();
 			let hashedPassword = await bcrypt.hash(req.body.password, salt);
 			console.log(salt);
 			console.log(hashedPassword);
-			let user = { name: userName, password: hashedPassword };
-			console.log(user);
+			// let user = { name: userName, password: hashedPassword };
+			// console.log(user);
 			return usersData
-				.addUser(user)
+				.addUser(userName, hashedPassword)
 				.then(() => {
 					usersData.list();
 				})
@@ -84,14 +86,20 @@ app.post("/users/login", async (req, res) => {
 		}
 	}
 	try {
-		if (await bcrypt.compare(req.body.password, user.password)) {
+		console.log("hi", parsed[userName][0]);
+		console.log("hello", req.body.password);
+		if (await bcrypt.compare(req.body.password, parsed[userName][0])) {
 			// res.send("success");
+			console.log("wtf");
 			res.redirect(`/users/${userName}`);
 			// .render("usersHome", {
 			//   title: userName,
 			//   userName: userName,
 			// });
-		} else res.send("wrong password");
+		} else {
+			console.log("diu");
+			res.send("wrong password");
+		}
 	} catch {
 		res.status(500).send();
 	}
@@ -210,6 +218,15 @@ app.post("/note", (req, res) => {
 		});
 });
 
+//
+app.get("/note/:username/:value/:index", (req, res) => {
+	console.log("redirecting");
+});
+app.get("/note/:username/:index", (req, res) => {
+	console.log("redirecting");
+});
+//
+
 app.put("/note/:username/:value/:index", (req, res) => {
 	console.log("updating json file");
 	let index = req.params.index;
@@ -241,7 +258,7 @@ app.delete("/note/:username/:index", (req, res) => {
 			console.log("trying redirect");
 			// console.log(notes);
 			// res.redirect(`/users/${userName}`);
-			res.json(notes);
+			res.send("deleted");
 			// res.render('index', {notes})
 			// res.status(200).json(notes);
 		})

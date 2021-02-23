@@ -10,8 +10,9 @@
       integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="http://localhost:8080/style.css" />
+    {{!-- <link rel="stylesheet" href="http://localhost:8080/style.css" /> --}}
     <link rel="stylesheet" href="../style.css" />
+    {{!-- <link href="<?php echo base_url('../style.css'); ?>" rel="stylesheet"> --}}
 
   </head>
   <body>
@@ -20,7 +21,7 @@
 <footer>
   <div class="container-fluid padding">
     <div class="row text-center">
-      <div class="col-md-6">
+      {{!-- <div class="col-md-6">
         <p>Visit Me</p>
         <hr class="light">
         <p>CoCoon Ignite Ventures</p>
@@ -28,13 +29,12 @@
           <p>3/F, Citicorp Center, 18 Whitfield Rd</p>
           <p>Tin Hau, Hong Kong</p>
         </a>
-      </div>
-      <div class="col-md-6">
-        <p>Hours</p>
+      </div> --}}
+      <div class="col-md-12">
+        <p>©derfc  2021</p>
         <hr class="light">
-        <p>Monday - Friday</p>
-        <p>9am - 6pm</p>
-        <p><i class="fab fa-whatsapp"></i>+852 2180 0000</p>
+        <p>more on github</p>
+        <a target="_blank" href="https://github.com/derfc/note">https://github.com/derfc/note</a>
       </div>
     </div>
   </div>
@@ -61,10 +61,9 @@
                   type: "DELETE",
                   success: function(){
                     console.log("success")
-                    window.location.reload()
                   }         
         })
-      .done(function(){window.location.reload()})
+      .done(function(){setTimeout(function(){window.location.reload()}, 150)})
       .fail(()=>console.log("hahafail"))
       .always(()=>console.log("running"))
       })
@@ -81,12 +80,10 @@
                     console.log("success")
                   }
         })
-        .done(function(){window.location.reload()})
+        .done(function(){setTimeout(function(){window.location.reload()}, 150)})
         .fail(()=>console.log("fail again"))
         .always(()=>console.log("still running"))
       })
-
-
 
 
       })

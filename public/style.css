@@ -6,6 +6,9 @@ header {
 	background-color: black;
 	padding: 10px;
 }
+/* body {
+	background-color: #1f1c13;
+} */
 section {
 	/* background-color: red; */
 	/* background: url(/asset/sunset.jpg);
@@ -17,7 +20,7 @@ section {
 	justify-content: center;
 	align-items: center;
 	padding: 50px;
-	height: 100vh;
+	/* height: 100vh; */
 }
 .box {
 	width: 400px;
@@ -82,11 +85,44 @@ section {
 .container {
 	justify-content: center;
 	padding: 50px;
+	/* margin: 0px; */
 }
 
-.output {
-	background-color: #1f1c13;
+.working-area {
+	/* background-color: #1f1c13; */
+	/* height: 70vh; */
 }
+/* .input {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+} */
+.input {
+	height: 50vh;
+}
+.output {
+	height: 50vh;
+}
+
+.output-outside {
+	overflow-y: scroll;
+	resize: none;
+	height: 80%;
+}
+.output-text {
+	overflow-y: scroll;
+	resize: none;
+	/* height: 70vh; */
+	padding: 5px;
+}
+
+textarea {
+	overflow-y: scroll;
+	height: 100%;
+	resize: none;
+	width: 100%;
+}
+
 footer {
 	background-color: cadetblue;
 	padding: 10px;

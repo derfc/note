@@ -1,28 +1,38 @@
 {{!-- <div class="greeting">
 <h1 class="text-center">hello {{ userName }}</h1>
 </div> --}}
-<div class="working-area container">
+<section>
+<div class="working-area">
   <div class="row">
-<div class="input col">
+<div class="input col-md-6 col-sm-12">
 <form action="/note" method="POST">
-          <h3>write something</h3>
+          <h2>write something</h2>
           <div class="inputbox">
-            <input type="text" name="{{ userName }}" />
-            {{!-- <textarea type="text" name="{{ userName }}" rows="4" cols="40"></textarea> --}}
+            {{!-- <input type="text" name="{{ userName }}" /> --}}
+            <textarea type="text" name="{{ userName }}" rows="4" cols="40"></textarea>
           </div>
           <input type="submit" name="submit" value="submit" id="sumbit" />
 </form>
 </div>
 
-<div class="output col">
+<div class="output col-md-6 col-sm-12">
 <h2>{{userName}}'s note</h2>
+<div class="output-outside">
 {{#each note}}
 {{!-- {{this}}:{{@index}} --}}
-<textarea id="text{{@index}}" name="{{userName}}" class="text-area"data-number={{@index}} rows="4" cols="50">
+<div class="row output-text">
+  <div class="col-8">
+<textarea id="text{{@index}}" name="{{userName}}" class="text-area"data-number={{@index}} >
 {{this}}
 </textarea>
+</div>
+<div class="col-4">
 <button method="DELETE" name="{{userName}}" id="{{@index}}" class="button"value="delete">delete</button>
+</div>
+</div>
 {{/each}}
 </div>
 </div>
 </div>
+</div>
+</section>

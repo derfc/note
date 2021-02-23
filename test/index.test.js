@@ -1,4 +1,4 @@
-const app = require("./working");
+const app = require("../working");
 const request = require("supertest");
 
 describe("Routes", () => {

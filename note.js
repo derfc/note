@@ -14,13 +14,14 @@ module.exports = class Note {
 						res();
 					})
 					.catch(() => {
-						this.note = [];
+						this.note = {};
 						this.write().then(res).catch(rej);
 					});
 			});
 		}
 		return this.initPromise;
 	}
+
 	read() {
 		return new Promise((res, rej) => {
 			fs.readFile(this.file, "utf-8", (err, data) => {
@@ -57,23 +58,22 @@ module.exports = class Note {
 		});
 	}
 
-	addUser(user) {
+	addUser(user, password) {
 		return this.init().then(() => {
-			return this.read().then(() => {
-				console.log("Adding user: ", user);
-				this.note.push(user);
+			if (typeof this.note[user] == "undefined") {
+				this.note[user] = [password];
 				return this.write();
-			});
+			}
 		});
 	}
 
 	update(userName, index, newNote) {
 		return this.init().then(() => {
 			return this.read().then(() => {
-				console.log(this.note);
-				console.log("wtf", userName);
-				console.log(index);
-				console.log(newNote);
+				// console.log(this.note);
+				// console.log("wtf", userName);
+				// console.log(index);
+				// console.log(newNote);
 				this.note[userName][index] = newNote;
 				return this.write();
 			});
@@ -83,9 +83,9 @@ module.exports = class Note {
 		return this.init().then(() => {
 			return this.read().then(() => {
 				// console.log("Note to delete: ", this.note[index]);
-				console.log(this.note);
-				console.log(userName);
-				console.log(index);
+				// console.log(this.note);
+				// console.log(userName);
+				// console.log(index);
 				this.note[userName].splice(index, 1);
 				return this.write();
 			});
