@@ -24,7 +24,9 @@
 		"express": "^4.17.1",
 		"express-basic-auth": "^1.2.0",
 		"express-handlebars": "^5.2.1",
-		"fs": "^0.0.1-security"
+		"fs": "^0.0.1-security",
+		"knex": "^0.21.18",
+		"pg": "^8.5.1"
 	},
 	"devDependencies": {
 		"jest": "^26.6.3",

@@ -10,9 +10,7 @@
       integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
       crossorigin="anonymous"
     />
-    {{!-- <link rel="stylesheet" href="http://localhost:8080/style.css" /> --}}
     <link rel="stylesheet" href="../style.css" />
-    {{!-- <link href="<?php echo base_url('../style.css'); ?>" rel="stylesheet"> --}}
 
   </head>
   <body>
@@ -21,15 +19,6 @@
 <footer>
   <div class="container-fluid padding">
     <div class="row text-center">
-      {{!-- <div class="col-md-6">
-        <p>Visit Me</p>
-        <hr class="light">
-        <p>CoCoon Ignite Ventures</p>
-        <a href="https://www.google.com/maps/place/CoCoon+Ignite+Ventures/@22.2860785,114.190358,15z/data=!4m5!3m4!1s0x0:0xa5da560274bd706c!8m2!3d22.2860785!4d114.190358">
-          <p>3/F, Citicorp Center, 18 Whitfield Rd</p>
-          <p>Tin Hau, Hong Kong</p>
-        </a>
-      </div> --}}
       <div class="col-md-12">
         <p>©derfc  2021</p>
         <hr class="light">
@@ -53,34 +42,31 @@
     <script>
       $(document).ready(() => {
         let userName = "{{title}}"
-        console.log(userName)
       $("button").click((e)=>{
         e.preventDefault()
-        console.log("line78", e.target.id)
-        $.ajax({url: `/note/${userName}/${e.target.id}`, 
+        $.ajax({url: `/user/notes/${e.target.id}`, 
                   type: "DELETE",
                   success: function(){
                     console.log("success")
                   }         
         })
-      .done(function(){setTimeout(function(){window.location.reload()}, 150)})
+      .done(function(){window.location.reload()})
       .fail(()=>console.log("hahafail"))
       .always(()=>console.log("running"))
       })
 
 
-      $("textarea").focusout((e)=>{
+      $(".text-area").focusout((e)=>{
         e.preventDefault()
-        console.log(e.target.dataset.number)
-        console.log(e.target.value)
         $.ajax({
-          url:`/note/${userName}/${e.target.value}/${e.target.dataset.number}`,
+          url:`/user/notes/${e.target.dataset.number}`,
           type:"PUT",
+          data: {update:e.target.value}, 
           success: function(){
                     console.log("success")
                   }
         })
-        .done(function(){setTimeout(function(){window.location.reload()}, 150)})
+        .done(function(){window.location.reload()})
         .fail(()=>console.log("fail again"))
         .always(()=>console.log("still running"))
       })

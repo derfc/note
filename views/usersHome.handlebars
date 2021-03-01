@@ -5,7 +5,7 @@
 <div class="working-area">
   <div class="row">
 <div class="input col-md-6 col-sm-12">
-<form action="/note" method="POST">
+<form action="/user/notes" method="POST">
           <h2>write something</h2>
           <div class="inputbox">
             {{!-- <input type="text" name="{{ userName }}" /> --}}
@@ -18,16 +18,15 @@
 <div class="output col-md-6 col-sm-12">
 <h2>{{userName}}'s note</h2>
 <div class="output-outside">
-{{#each note}}
-{{!-- {{this}}:{{@index}} --}}
+{{#each data}}
 <div class="row output-text">
   <div class="col-8">
-<textarea id="text{{@index}}" name="{{userName}}" class="text-area"data-number={{@index}} >
-{{this}}
+<textarea id="text{{this.id}}" name="{{userName}}" class="text-area"data-number={{this.id}} >
+{{this.notes}}
 </textarea>
 </div>
 <div class="col-4">
-<button method="DELETE" name="{{userName}}" id="{{@index}}" class="button"value="delete">delete</button>
+<button method="DELETE" name="{{userName}}" id="{{this.id}}" class="button"value="delete">delete</button>
 </div>
 </div>
 {{/each}}
