@@ -1,13 +1,14 @@
+require("dotenv").config();
 const knex = require("knex")({
 	client: "postgresql",
 	connection: {
-		database: "noteapp",
-		user: "root",
-		password: "root",
+		database: process.env.db_name,
+		user: process.env.db_username,
+		password: process.env.db_password,
 	},
 });
 
-module.exports = class newNote {
+module.exports = class NoteSQL {
 	constructor(notes) {
 		this.notes = notes;
 	}

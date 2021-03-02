@@ -14,7 +14,7 @@
 
   </head>
   <body>
-    <header><h1>hello {{ title }}</h1></header>
+    <header><div><h1>hello {{ title }}</h1></div></header>
     {{{body}}}
 <footer>
   <div class="container-fluid padding">
@@ -42,7 +42,13 @@
     <script>
       $(document).ready(() => {
         let userName = "{{title}}"
-      $("button").click((e)=>{
+        if (userName != ""){
+          $("header").append(`<div class="logout"><a href="/"><button id="logout" class="button-logout"value="logout">logout</button></a></div>`)
+        }
+
+
+
+      $(".button-del").click((e)=>{
         e.preventDefault()
         $.ajax({url: `/user/notes/${e.target.id}`, 
                   type: "DELETE",

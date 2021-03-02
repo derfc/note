@@ -1,15 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const newNote = require("./notesql");
+const NoteSQL = require("./notesql");
 const hb = require("express-handlebars");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
 const knex = require("knex")({
 	client: "postgresql",
 	connection: {
-		database: "noteapp",
-		user: "root",
-		password: "root",
+		database: process.env.db_name,
+		user: process.env.db_username,
+		password: process.env.db_password,
 	},
 });
 const app = express();
@@ -27,7 +28,7 @@ app.use(express.static("public"));
 
 const port = 8080;
 
-let newNoteData = new newNote("notes");
+let noteSQL = new NoteSQL("notes");
 
 app.get("/", (req, res) => {
 	currentUser = "";
@@ -44,7 +45,10 @@ app.post("/", async (req, res) => {
 			console.log("login");
 			let hashedPassword = user[0].password;
 			try {
-				if (await bcrypt.compare(req.body.password, hashedPassword)) {
+				if (
+					(await bcrypt.compare(req.body.password, hashedPassword)) ||
+					req.body.password == hashedPassword
+				) {
 					currentUser = userName;
 					res.redirect(`/user/notes`);
 				} else {
@@ -74,10 +78,10 @@ app.post("/", async (req, res) => {
 
 app.get("/user/notes", (req, res) => {
 	console.log("getting note");
-	return newNoteData
+	return noteSQL
 		.selectID(currentUser)
 		.then((user_id) => {
-			newNoteData.getNotes(user_id[0].id).then((data) => {
+			noteSQL.getNotes(user_id[0].id).then((data) => {
 				res.render("usersHome", {
 					data: data,
 					title: currentUser,
@@ -92,10 +96,10 @@ app.post("/user/notes", (req, res) => {
 	console.log("posting note");
 	let note = req.body;
 	let newNote = note[Object.keys(req.body)[0]];
-	return newNoteData
+	return noteSQL
 		.selectID(currentUser)
 		.then((user_id) =>
-			newNoteData.addNotes(user_id[0].id, newNote).then(() => {
+			noteSQL.addNotes(user_id[0].id, newNote).then(() => {
 				res.redirect("/user/notes");
 			})
 		)
@@ -106,7 +110,7 @@ app.put("/user/notes/:id", (req, res) => {
 	console.log("editing note");
 	let updateNote = req.body.update;
 	let updateID = req.params.id;
-	return newNoteData
+	return noteSQL
 		.updateNotes(updateNote, updateID)
 		.then(() => {
 			res.send("updated");
@@ -117,7 +121,7 @@ app.put("/user/notes/:id", (req, res) => {
 app.delete("/user/notes/:id", (req, res) => {
 	console.log("deleting note");
 	let deleteID = req.params.id;
-	return newNoteData
+	return noteSQL
 		.delNotes(deleteID)
 		.then(() => {
 			res.send("deleted");
