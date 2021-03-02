@@ -9,12 +9,14 @@ const knex = require("knex")({
 });
 
 module.exports = class NoteSQL {
-	constructor(notes) {
+	constructor(notes, users) {
 		this.notes = notes;
+		this.users = users;
 	}
 
 	selectID(userName) {
-		return knex.select("id").from("users").where("username", `${userName}`);
+		// return knex.select("id").from("users").where("username", `${userName}`);
+		return knex(this.users).select("id").where("username", `${userName}`);
 	}
 
 	getNotes(user_id) {

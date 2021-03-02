@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.static("public"));
 app.engine("handlebars", hb({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-let noteSQL = new NoteSQL("notes");
+let noteSQL = new NoteSQL("notes", "users");
 let userSQL = new UserSQL("users");
 let currentUser;
 
