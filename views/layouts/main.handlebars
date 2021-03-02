@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{#if title}}
     <title>{{ title }}'s note</title>
+    {{else}}
+    <title>NoteApp</title>
+    {{/if}}
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -14,7 +18,16 @@
 
   </head>
   <body>
-    <header><div><h1>hello {{ title }}</h1></div></header>
+    <header>
+      <div>
+        <h1>hello {{ title }}</h1>
+      </div>
+    {{#if userName}}
+    <div class="logout">
+      <a href="/"><button id="logout" class="button-logout"value="logout">logout</button></a>
+    </div>
+    {{/if}}
+    </header>
     {{{body}}}
 <footer>
   <div class="container-fluid padding">
@@ -39,14 +52,18 @@
       integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
       crossorigin="anonymous"
     ></script>
-    <script>
+    <script src="../script.js"></script>
+  </body>
+</html>
+
+
+
+{{!-- <script>
       $(document).ready(() => {
         let userName = "{{title}}"
         if (userName != ""){
           $("header").append(`<div class="logout"><a href="/"><button id="logout" class="button-logout"value="logout">logout</button></a></div>`)
         }
-
-
 
       $(".button-del").click((e)=>{
         e.preventDefault()
@@ -76,9 +93,5 @@
         .fail(()=>console.log("fail again"))
         .always(()=>console.log("still running"))
       })
-
-
       })
-    </script>
-  </body>
-</html>
+    </script> --}}

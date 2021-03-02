@@ -2,19 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const NoteSQL = require("./notesql");
+const UserSQL = require("./usersql");
 const hb = require("express-handlebars");
 const bcrypt = require("bcrypt");
-require("dotenv").config();
-const knex = require("knex")({
-	client: "postgresql",
-	connection: {
-		database: process.env.db_name,
-		user: process.env.db_username,
-		password: process.env.db_password,
-	},
-});
+const port = 8080;
 const app = express();
-let currentUser;
 app.use(
 	bodyParser.urlencoded({
 		extended: true,
@@ -22,23 +14,26 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static("public"));
 app.engine("handlebars", hb({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-app.use(express.static("public"));
-
-const port = 8080;
-
 let noteSQL = new NoteSQL("notes");
+let userSQL = new UserSQL("users");
+let currentUser;
 
 app.get("/", (req, res) => {
 	currentUser = "";
-	res.render("index");
+	try {
+		res.status(200).render("index");
+	} catch (err) {
+		res.status(500).send();
+	}
 });
 
 app.post("/", async (req, res) => {
 	console.log("login");
 	let userName = req.body.username;
-	let checkUser = knex("users").where("username", userName);
+	let checkUser = userSQL.selectUser(userName);
 	checkUser.then(async (user) => {
 		if (user[0]) {
 			//login
@@ -63,10 +58,7 @@ app.post("/", async (req, res) => {
 			try {
 				let salt = await bcrypt.genSalt();
 				let hashedPassword = await bcrypt.hash(req.body.password, salt);
-				await knex("users").insert({
-					username: userName,
-					password: hashedPassword,
-				});
+				await userSQL.insert(userName, hashedPassword);
 				currentUser = userName;
 				res.redirect(`/user/notes`);
 			} catch {
@@ -78,18 +70,22 @@ app.post("/", async (req, res) => {
 
 app.get("/user/notes", (req, res) => {
 	console.log("getting note");
-	return noteSQL
-		.selectID(currentUser)
-		.then((user_id) => {
-			noteSQL.getNotes(user_id[0].id).then((data) => {
-				res.render("usersHome", {
-					data: data,
-					title: currentUser,
-					userName: currentUser,
+	if (currentUser) {
+		return noteSQL
+			.selectID(currentUser)
+			.then((user_id) => {
+				noteSQL.getNotes(user_id[0].id).then((data) => {
+					res.render("usersHome", {
+						data: data,
+						title: currentUser,
+						userName: currentUser,
+					});
 				});
-			});
-		})
-		.catch((err) => res.status(500).json(err));
+			})
+			.catch((err) => res.status(500).json(err));
+	} else {
+		res.send("please login").catch((err) => res.status(500).json(err));
+	}
 });
 
 app.post("/user/notes", (req, res) => {

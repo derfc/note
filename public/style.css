@@ -12,16 +12,8 @@ header {
 .logout {
 	margin-left: auto;
 	margin-right: 10;
-	/* justify-self: flex-end;
-	float: right; */
 }
-/* body {
-	background-color: #1f1c13;
-} */
 section {
-	/* background-color: red; */
-	/* background: url(/asset/sunset.jpg);
-  background-size: cover; */
 	background-color: #1f1c13;
 	margin: 0;
 	display: flex;
@@ -29,7 +21,6 @@ section {
 	justify-content: center;
 	align-items: center;
 	padding: 50px;
-	/* height: 100vh; */
 }
 .box {
 	width: 400px;
@@ -80,7 +71,18 @@ section {
 	font-size: 12px;
 }
 
-.box input[type="submit"] {
+input[type="submit"] {
+	background: transparent;
+	border: none;
+	outline: none;
+	color: #fff;
+	background: #03a9f4;
+	padding: 10px 20px;
+	cursor: pointer;
+	border-radius: 30px;
+}
+
+button {
 	background: transparent;
 	border: none;
 	outline: none;
@@ -94,23 +96,13 @@ section {
 .container {
 	justify-content: center;
 	padding: 50px;
-	/* margin: 0px; */
 }
 
-.working-area {
-	/* background-color: #1f1c13; */
-	/* height: 70vh; */
-}
-/* .input {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-} */
 .input {
-	height: 50vh;
+	height: 60vh;
 }
 .output {
-	height: 50vh;
+	height: 60vh;
 }
 
 .output-outside {
@@ -121,7 +113,6 @@ section {
 .output-text {
 	overflow-y: scroll;
 	resize: none;
-	/* height: 70vh; */
 	padding: 5px;
 }
 

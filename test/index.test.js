@@ -1,21 +1,22 @@
-const app = require("../working");
+const app = require("../app");
 const request = require("supertest");
+// let response;
 
 describe("Routes", () => {
-	test("/user should return users page", (done) => {
+	test("/ should return index", (done) => {
 		request(app)
-			.get("/users")
+			.get("/")
 			.expect(200)
-			.expect("content-type", /json/)
+			.expect("content-type", /html/)
 			.end((err, res) => {
 				if (err) throw err;
 				done();
 			});
 	});
 
-	test("/user/bitch should return bitch's page", (done) => {
+	test("/user/notes should return user's home page", (done) => {
 		request(app)
-			.get("/users/bitch")
+			.get("/users/notes")
 			.expect(200)
 			.expect("content-type", /html/)
 			.end((err, res) => {

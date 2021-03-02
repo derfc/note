@@ -10,7 +10,7 @@ exports.up = function (knex) {
 			return knex.schema.createTable("notes", (table) => {
 				table.increments();
 				table.string("notes").notNull();
-				table.integer("user_id").unsigned();
+				// table.integer("user_id").unsigned();
 				table.foreign("user_id").references("users.id");
 				table.timestamps(true, true);
 			});
