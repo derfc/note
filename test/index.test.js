@@ -1,4 +1,5 @@
-const app = require("../app");
+// const app = require("../app");
+const app = "http://localhost:8080";
 const request = require("supertest");
 // let response;
 
@@ -14,9 +15,11 @@ describe("Routes", () => {
 			});
 	});
 
-	test("/user/notes should return user's home page", (done) => {
+	test("/user/notes should return user's home page if user is not null", (done) => {
+		var auth = "Basic c2FtOjEyMw==";
 		request(app)
 			.get("/users/notes")
+			.set("Authorization", auth)
 			.expect(200)
 			.expect("content-type", /html/)
 			.end((err, res) => {

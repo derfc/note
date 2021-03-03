@@ -109,7 +109,15 @@ app.put("/user/notes/:id", (req, res) => {
 	return noteSQL
 		.updateNotes(updateNote, updateID)
 		.then(() => {
-			res.send("updated");
+			noteSQL.selectID(currentUser).then((user_id) => {
+				noteSQL.getNotes(user_id[0].id).then((data) => {
+					res.render("usersHome", {
+						data: data,
+						title: currentUser,
+						userName: currentUser,
+					});
+				});
+			});
 		})
 		.catch((err) => res.status(500).json(err));
 });

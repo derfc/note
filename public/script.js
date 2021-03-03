@@ -5,11 +5,12 @@ $(document).ready(() => {
 			url: `/user/notes/${e.target.id}`,
 			type: "DELETE",
 			success: function () {
-				console.log("success");
+				console.log("success del");
 			},
 		})
 			.done(function () {
 				window.location.reload();
+				// console.log("hello");
 			})
 			.fail(() => console.log("hahafail"))
 			.always(() => console.log("running"));
@@ -25,7 +26,8 @@ $(document).ready(() => {
 			},
 		})
 			.done(function () {
-				window.location.reload();
+				// window.location.reload();
+				console.log("hello");
 			})
 			.fail(() => console.log("fail again"))
 			.always(() => console.log("still running"));
